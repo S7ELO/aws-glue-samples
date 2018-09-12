@@ -67,7 +67,7 @@ object JoinAndRelationalize {
     println("Writing to /legislator_part, partitioned by Senate and House ...")
 
     glueContext.getSinkWithFormat(connectionType = "s3",
-      options = JsonOptions(Map("path" -> outputLgSingleDir, "partitionKeys" -> List("org_name"))),
+      options = JsonOptions(Map("path" -> outputLgPartitionedDir, "partitionKeys" -> List("org_name"))),
       format = "parquet", transformationContext = "").writeDynamicFrame(lHistory)
 
     // ---- Write out to relational databases ----
